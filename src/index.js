@@ -1,4 +1,4 @@
-import React from 'react';
+//import React from 'react';
 import ReactDOM from 'react-dom';
 
 import ExampleReactBoostrap from './exampleractboostrap.js';
@@ -9,6 +9,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './miscss.css'
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 import { Button } from 'reactstrap';
+//import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default (props) => {
   return (
@@ -58,6 +60,92 @@ class HelloMessage extends React.Component {
       </div>
     );
   }
+}
+
+class Hooks extends React.Component{
+
+}
+
+//Hook de estado
+class ExampleHookEstado extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0
+    };
+  }
+
+  render() {
+    return (
+      <div>
+        <p>You clicked {this.state.count} times</p>
+        <button onClick={() => this.setState({ count: this.state.count + 1 })}>
+          Click me
+        </button>
+      </div>
+    );
+  }
+}
+
+function HookEstado() {
+  // Declara una nueva variable de estado, que llamaremos "count".
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>
+        Click me
+      </button>
+    </div>
+  );
+}
+
+//Hook de efecto
+class ExampleHookEfecto extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0
+    };
+  }
+
+  componentDidMount() {
+    document.title = `You clicked ${this.state.count} times`;
+  }
+  componentDidUpdate() {
+    document.title = `You clicked ${this.state.count} times`;
+  }
+
+  render() {
+    return (
+      <div>
+        <p>You clicked {this.state.count} times</p>
+        <button onClick={() => this.setState({ count: this.state.count + 1 })}>
+          Click me
+        </button>
+      </div>
+    );
+  }
+}
+
+function HookEfecto() {
+  const [count, setCount] = useState(0);
+
+  // Similar a componentDidMount y componentDidUpdate:
+  useEffect(() => {
+    // Actualiza el título del documento usando la Browser API
+    document.title = `You clicked ${count} times`;
+  });
+
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>
+        Click me
+      </button>
+    </div>
+  );
 }
 
 function Avatar(props){
@@ -169,15 +257,20 @@ class TodoList extends React.Component {
   }
 }
 
+ReactDOM.render(
+  <ExampleHookEstado />,
+  document.getElementById('root')
+);
+
 /*ReactDOM.render(
   <ExampleReactBoostrap />,
   document.getElementById('root')
 );*/
 
-ReactDOM.render(
+/*ReactDOM.render(
   <TodoApp />,
   document.getElementById('root')
-);
+);*/
 
 /*ReactDOM.render(
     <ExampleNavegacion />
